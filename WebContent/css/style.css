@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+body {
+	background-image: url("../img/book1.jpg");
+	background-size: cover;
+	font-family: 'Montserrat', sans-serif; 
+	display: flex;
+	flex-direction: column;
+}
+
+.buttonInHeader {
+	display:block;
+	-moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f0c911), color-stop(1, #f2ab1e));
+	background:-moz-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-webkit-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-o-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-ms-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0c911', endColorstr='#f2ab1e',GradientType=0);
+	background-color:#f0c911;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #e65f44;
+	display:inline-block;
+	height: 50px;
+	width: 200px;
+	text-align: center;
+	font-family: Montserrat;
+	font-size : 18px;
+	border-radius: 5px;
+	padding: 15px 32px;
+	border-color: orange;
+}
+
+table, th {
+	font-style: normal;
+	border: 1px solid orange;
+	border-radius: 5px 5px 0 0;
+	text-align: left;
+	vertical-align: middle;
+	background-color: #f9eca0;
+	border-collapse: collapse;
+}
+
+table.details {
+	font-style: normal;
+	border:none;
+	background-color: transparent;
+}
+td.fieldsToFill {
+	width: 60%;
+	font-family: 'Montserrat', sans-serif; 
+}
+option {
+	font-family: 'Montserrat', sans-serif; 
+}
+
+input.toFill {
+	width: 250px;
+	font-family: 'Montserrat', sans-serif; 
+}
+label {
+	font-weight: bold;
+	text-shadow: 2px 2px 4px orange;
+}
+
+h4 {
+	text-shadow: 2px 2px 4px orange;
+	font-family: 'Montserrat', sans-serif; 
+}
+.buttonInHeader:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f2ab1e), color-stop(1, #f0c911));
+	background:-moz-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-webkit-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-o-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-ms-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911',GradientType=0);
+	background-color:#f2ab1e;
+}
+
+#booksBox {
+	visibility : hidden;
+}
+.buttonInHeader:active {
+	position:relative;
+	top:1px;
+}
+
+.leftList {
+	width : 22em;
+	border-color: orange;
+	height : 25em;
+}
+
+.leftDiv {
+	width : 30%;
+	padding : 10px 0 10px 0;
+}
+
+.centerDiv {
+	width : 45%;
+	padding : 10px;
+	margin-left: 50px;
+}
+
+container {
+	width : 100%;
+	padding : 8 px;
+	display: flex;
+	flex-direction: row;
+}
+input[type=text] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+    border-color:#333;
+}
+
+input[type=submit] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:1px solid DarkGray;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+input[type=button] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:1px solid DarkGray;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
