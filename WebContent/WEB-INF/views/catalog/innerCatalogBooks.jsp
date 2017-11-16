@@ -1,4 +1,6 @@
 <br />
+<div id="booksInCatalog" style="visibility:hidden;"></div>
+<div id="booksList" style="visibility:hidden;">
 <table>
 	<tr>
 
@@ -15,3 +17,4 @@
 
 	</tr>
 </table>
+</div>

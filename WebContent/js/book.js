@@ -53,9 +53,10 @@ function viewBookDetails(resultBook, copies) {
 		$('#catalog').val(resultBook.catalog.catalogName);
 		console.log("nb copies = " + copies.length);
 		$('#numberOfCopies').val(copies.length);
-		}
+	}
 	if (copies.length != 0) {
 		select = document.getElementById('copiesBox');
+		document.getElementById("copiesList").style.visibility="visible";
 		select.size="5";
 		removeOptions(select);
 		for (var i = 0; i < copies.length; i++) {
@@ -65,6 +66,12 @@ function viewBookDetails(resultBook, copies) {
 			opt.innerHTML = "exemplaire n°" + copies[i].id + ", statut disponible : " + copies[i].available + ", en réparation : " + copies[i].underRepair; 
 			select.appendChild(opt);
 		}
+	}
+	else {
+		select = document.getElementById('copiesBox');
+		removeOptions(select);
+		select.size="0";
+		document.getElementById("copiesList").style.visibility="hidden";
 	}
 }
 

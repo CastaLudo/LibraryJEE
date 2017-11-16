@@ -46,7 +46,7 @@
 				<input type="submit" value="Ajouter Catalogue">
 			
 			</form>
-			<div id="booksInCatalog"></div>
+			
 			<jsp:include page="innerCatalogBooks.jsp"></jsp:include>
 		
 		</div>
