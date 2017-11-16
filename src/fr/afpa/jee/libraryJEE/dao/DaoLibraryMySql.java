@@ -203,7 +203,10 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		return catalogs;
 	}
 
-
+/**Return a list of Books
+ * @param keywords
+ * return an Arraylist of Books where title or subtitle contains keywords
+ */
 	public ArrayList<Book> searchBook(String keywords) {
 		ArrayList<Book> books = new ArrayList<Book>();
 		try {
@@ -240,7 +243,9 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		return books;			
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public Copy getCopy(int id) {
 		Copy c = null;
 		try {
@@ -275,6 +280,9 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	}
 
 
+	/** 
+	 * 
+	 */
 	public ArrayList<Subscriber> searchSubscriber(String name) {
 		ArrayList<Subscriber> subscribers = new ArrayList<Subscriber>();
 
@@ -308,7 +316,10 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		return subscribers;
 	}
 
-	@Override
+	/* (non-Javadoc)
+	 * @see fr.afpa.jee.libraryJEE.dao.IDaoLibrary#searchBorrow()
+	 */
+
 	public ArrayList<Copy> searchBorrow() {
 		ArrayList<Copy> copies = new ArrayList<Copy>();
 		try {
@@ -409,7 +420,10 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		return books;
 	}
 
-
+/**Return the Borrower's information
+ * @param id of a copy
+ * return the informations of the subcriber's borrower
+ */
 	public Subscriber getBorrower(int idCopy) {
 		Subscriber s = null;
 		try {
