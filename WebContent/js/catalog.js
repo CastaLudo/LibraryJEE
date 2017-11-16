@@ -75,9 +75,11 @@ function removeOptions(selectbox) {
  */
 function viewBooksFromCatalog(resultat) {
 	if (resultat.length != 0) {
+		console.log("visible");
 		document.getElementById("booksInCatalog").style.visibility="hidden";
-		document.getElementById('booksBox').style.visibility="visible";
+		document.getElementById('booksList').style.visibility="visible";
 		select = document.getElementById('booksBox');
+		select.style.visibility="visible";
 		document.getElementById('booksBox').size="15";
 		removeOptions(select);
 //		document.getElementsByName('catalogName').textContent = resultat[0].catalog.catalogName;
@@ -93,7 +95,9 @@ function viewBooksFromCatalog(resultat) {
 		}
 	}
 	else {
-		document.getElementById('booksBox').style.visibility="hidden";
+		console.log("caché");
+		document.getElementById('booksList').style.visibility="hidden";
+		document.getElementById("booksBox").style.visibility="hidden";
 		document.getElementById("booksInCatalog").style.visibility="visible";
 		document.getElementById("booksInCatalog").innerHTML = "Il n'y a pas de livre référencé dans ce catalogue";
 	}
