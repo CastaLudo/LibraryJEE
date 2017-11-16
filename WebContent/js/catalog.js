@@ -2,10 +2,6 @@
  * 
  */
 
-function test() {
-	console.log("Hello World !");
-}
-
 function deleteCatalog() {
 	var selectedCatalog = document.getElementById("catalogs");
 	var valueSelected = selectedCatalog.options[selectedCatalog.selectedIndex];
