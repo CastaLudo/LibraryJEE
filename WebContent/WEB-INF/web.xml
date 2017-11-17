@@ -48,6 +48,8 @@
     <servlet-name>borrow</servlet-name>
     <url-pattern>/borrow</url-pattern>
     <url-pattern>/booksInBorrow</url-pattern>
+    <url-pattern>/subscriberBorrowing</url-pattern>
+    <url-pattern>/copyBorrowed</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>author</servlet-name>
