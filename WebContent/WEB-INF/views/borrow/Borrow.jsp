@@ -25,7 +25,7 @@
 		style="width: 100%; display: flex; flex-direction: row;">
 		<div class="leftDiv">
 			<table>
-					<th>Liste des Emprnts / Recherche </th>
+					<th>Liste des Emprunts / Recherche </th>
 				<tr>
 					<form name="selectSubscriber">
 					<td><select name="borrowSelected" size="6"
@@ -33,13 +33,16 @@
 							<c:forEach var="borrow" items="${borrows}">
 								<option name="copyId" value="${borrow.getId()}"
 								 onclick="">
-									<b>${borrow.getBook().getTitle()} Ex n°${borrow.getId()}</b>
+									<b>${borrow.getBook().getTitle()} - Exemplaire n°${borrow.getId()}</b>
 								</option>
 							</c:forEach>
 					</select></td>
 					</form>
 				</tr>
 			</table>
+		</div>
+		<div name="centerDiv">
+		<jsp:include page="borrowDetails.jsp"></jsp:include>
 		</div>
 </body>
 </html>
