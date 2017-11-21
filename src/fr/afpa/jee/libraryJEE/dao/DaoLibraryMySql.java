@@ -14,6 +14,10 @@ import fr.afpa.jee.libraryJEE.model.Copy;
 import fr.afpa.jee.libraryJEE.model.Subscriber;
 
 
+/**
+ * @author 34011-79-08
+ *
+ */
 public class DaoLibraryMySql implements IDaoLibrary {
 
 	private Connection connection = null;

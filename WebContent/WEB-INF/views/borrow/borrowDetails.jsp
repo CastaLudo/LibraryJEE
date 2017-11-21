@@ -18,7 +18,7 @@
 <br /><br />
 <table class="details">
 	<tr>
-	<td><strong>Id abonné</strong></td>
+	<td><strong>Id abonné </strong></td>
 		<td class="fieldsToFill"><input type="text" id="idBorrower"></td>
 		<td><input type="button" value="Ok"></td>
 	</tr>
