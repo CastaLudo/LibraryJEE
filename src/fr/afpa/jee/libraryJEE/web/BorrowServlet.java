@@ -8,13 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import fr.afpa.jee.libraryJEE.dao.DaoLibraryMySql;
 import fr.afpa.jee.libraryJEE.model.Copy;
+import fr.afpa.jee.libraryJEE.model.Subscriber;
 import fr.afpa.jee.libraryJEE.service.IServiceLibrary;
 import fr.afpa.jee.libraryJEE.service.ServiceLibrary;
 
 public class BorrowServlet extends HttpServlet{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	IServiceLibrary serviceLib;
 
 	public void init() throws ServletException {
@@ -27,6 +36,12 @@ public class BorrowServlet extends HttpServlet{
 				String action = request.getServletPath();
 				if (action.equals("/borrow")) {
 					gotoBorrowsPage(request, response);
+				}
+				if (action.equals("/copyDetails")) {
+					borrowedCopyDetails(request, response);
+				}
+				if (action.equals("/subscriberDetails")) {
+				borrowerDetails(request, response);
 				}
 
 	}
@@ -41,6 +56,28 @@ public class BorrowServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private void borrowedCopyDetails(HttpServletRequest req, HttpServletResponse rep) throws JsonProcessingException, IOException {
+		int id = Integer.valueOf(req.getParameter("id"));
+		Copy borrowedCopy = serviceLib.getCopy(id);
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		String arrayToJson = objectMapper.writeValueAsString(borrowedCopy);
+		rep.setContentType("application/JSON");
+		rep.setCharacterEncoding("UTF-8");
+		rep.getWriter().write(arrayToJson);
+	}
+	
+	private void borrowerDetails(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException, IOException {
+		int id = Integer.valueOf(request.getParameter("id"));
+		Subscriber borrower = serviceLib.getBorrower(id);
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		String arrayToJson = objectMapper.writeValueAsString(borrower);
+		response.setContentType("application/JSON");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(arrayToJson);
 	}
 
 }

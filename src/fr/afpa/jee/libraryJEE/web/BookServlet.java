@@ -69,20 +69,16 @@ public class BookServlet extends HttpServlet{
 
 	private void innerBookDetails(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		long id = Long.valueOf(request.getParameter("id"));
-		System.out.println(id);
 		Book selectedBook = serviceLib.getBook(id);
-		System.out.println(selectedBook.toString());
 		ObjectMapper objectMapper = new ObjectMapper();
 		// Set pretty printing of json
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		// 1. Convert List of Details objects to JSON
 		String arrayToJson = objectMapper.writeValueAsString(selectedBook);
-		// System.out.println("1. Convert List of Book objects to JSON :");
-		System.out.println(arrayToJson);
+		//define the Content Type for the response, the encoding type and Write the details values in the response;
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(arrayToJson);
-		System.out.println("book's details sent by Servlet");
 	}
 
 	private void booksWanted(HttpServletRequest request, HttpServletResponse response) {

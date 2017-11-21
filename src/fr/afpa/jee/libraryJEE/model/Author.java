@@ -1,5 +1,9 @@
 package fr.afpa.jee.libraryJEE.model;
 
+/**
+ * @author 34011-79-08
+ *
+ */
 public class Author {
 	
 	private String authorFirstName;
