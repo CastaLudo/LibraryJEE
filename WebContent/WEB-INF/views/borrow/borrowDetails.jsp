@@ -1,25 +1,32 @@
 <input type="button" value="Créer Emprunt">
-<br />
+<br /><br />
 <label>Livre emprunté</label>
-<table>
+<br /><br />
+<table class="details">
 	<tr>
-		<td><input type="text" id="idCopy"></td>
+	<td><strong>ISBN n° </strong></td>
+		<td class="fieldsToFill"><input type="text" id="idCopy"></td>
 		<td><input type="button" value="Ok"></td>
 	</tr>
 	<tr>
-		<td><input type="text" id="copyDetails"></td>
+	<td><strong>Informations  </strong></td>
+		<td class="fieldsToFill"><input class="toFill" type="text" id="copyDetails"></td>
 	</tr>
 </table>
 <br />
 <label>Emprunteur</label>
-<table>
+<br /><br />
+<table class="details">
 	<tr>
-		<td><input type="text" id="idBorrower"></td>
+	<td><strong>Id abonné</strong></td>
+		<td class="fieldsToFill"><input type="text" id="idBorrower"></td>
 		<td><input type="button" value="Ok"></td>
 	</tr>
 	<tr>
-		<td><input type="text" id="borrowerDetails"></td>
+	<td><strong>Informations  </strong></td>
+		<td class="fieldsToFill"><input class="toFill" type="text" id="borrowerDetails"></td>
 	</tr>
 </table>
+<br />
 <input type="button" value="Confirmer Emprunt">
-<input type="button" value="Retour Emprunt">
+<input type="button" value="Retourner Emprunt">
