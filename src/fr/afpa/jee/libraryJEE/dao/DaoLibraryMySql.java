@@ -260,7 +260,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			String query = "SELECT * FROM copy WHERE idCopy = " + id + ";";
 			resultInside = statement.executeQuery(query);
-			System.out.println(query);
 			while (resultInside.next()) {
 				boolean available = false;
 				boolean underRepair = false;
@@ -347,7 +346,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 				if (!result.getBoolean("available")) {
 					available = false;					
 				}
-				System.out.println(isbnBook);
 				Book book = getBook(isbnBook);
 				Copy copyToAdd = new Copy(book, id, available, underRepair);
 				copies.add(copyToAdd);
@@ -1029,7 +1027,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 				result = statement.executeQuery(preQuery);
 				while (result.next()) {
-					System.out.println(result.getInt(1));
 					if (result.getInt(1) > 0) {
 						query = "UPDATE borrow SET current = 1 WHERE Copy_idCopy = " + idCopy + " AND "
 								+ " Subscriber_idSubscriber = " + idSubscriber + " AND Copy_Book_isbn = " + isbn + ";";
@@ -1060,7 +1057,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement = connection.createStatement();
 
 			String query = "UPDATE copy SET underRepair = 0, available = 1 WHERE idCopy = '" + idCopy + "' ; ";
-			System.out.println(query);
 			statement.executeUpdate(query);
 
 			statement.close();
@@ -1103,12 +1099,10 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy WHERE Book_isbn = " + isbn + ";";
-			System.out.println(query);
 			result = statement.executeQuery(query);
 
 			while (result.next()) {
 				Book book = getBook(isbn);
-				System.out.println(book);
 				int id = result.getInt("idCopy");
 				boolean available = true;
 				boolean underRepair = false;
@@ -1170,7 +1164,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			String query = "SELECT * FROM copy WHERE idCopy = " + id + ";";
 			resultInside = statement.executeQuery(query);
-			System.out.println(query);
 			while (resultInside.next()) {
 				if (resultInside.getInt("available") == 1) {
 					copyStatus = true;
@@ -1195,7 +1188,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			String query = "SELECT * FROM copy WHERE idCopy = " + id + ";";
 			resultInside = statement.executeQuery(query);
-			System.out.println(query);
 			while (resultInside.next()) {
 				if (resultInside.getInt("underRepair") == 1) {
 					copyRepairStatus = true;
@@ -1242,7 +1234,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			String query = "UPDATE borrow SET current = 0 WHERE Copy_idCopy = "+ idCopy +" AND "
 					+ " Subscriber_idSubscriber = " + idSubscriber + " AND Copy_Book_isbn =" + isbn  + ";";
-			System.out.println(query);
 			statement.executeUpdate(query);
 
 			statement.close();
@@ -1355,7 +1346,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 					+ "%' OR subtitle  LIKE '%" + title.toLowerCase().replace("'", "\\'") + "%') OR ("
 					+ "firstName LIKE '%" + name.toLowerCase().replace("'", "\\'") +"%' "
 					+ "OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%'));";
-			System.out.println(query);
 			result = statement.executeQuery(query);
 
 			while (result.next()) {
@@ -1482,7 +1472,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		return copyToReturn;
 	}
 
-	@Override
+	
 	public ArrayList<Copy> getCopiesToBorrow(long isbn) {
 		ArrayList<Copy> copiesAvalaibleToBorrow = new ArrayList<Copy>();
 		try {
@@ -1511,7 +1501,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		return copiesAvalaibleToBorrow;
 	}
 
-	@Override
+	
 	public void deleteCopy(long isbn, int copyId) {
 		try {
 			//Get connection informations

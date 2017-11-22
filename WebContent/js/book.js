@@ -3,11 +3,8 @@
  */
 
 function getBookDetails(isbn) {
-	console.log("call 1rst function js");
 	var book = returnData('/libraryJEE/bookDetails?id='+isbn);
-	console.log("call js insert values");
 	var copies = returnCopies('/libraryJEE/nbCopies?id='+isbn);
-	console.log("copies : " + copies);
 	viewBookDetails(book, copies);
 }
 
@@ -45,13 +42,11 @@ function returnData(url) {
 
 function viewBookDetails(resultBook, copies) {
 	if (resultBook.length != 0) {
-		console.log("insert book details in centerDiv");
 		$('#isbn').attr({value : resultBook.isbn});
 		$('#title').val(resultBook.title);
 		$('#subtitle').val(resultBook.subtitle);
 		$('#author').val(resultBook.author.authorFirstName + " " + resultBook.author.authorLastName);
 		$('#catalog').val(resultBook.catalog.catalogName);
-		console.log("nb copies = " + copies.length);
 		$('#numberOfCopies').val(copies.length);
 	}
 	if (copies.length != 0) {
@@ -62,7 +57,6 @@ function viewBookDetails(resultBook, copies) {
 		for (var i = 0; i < copies.length; i++) {
 			var opt = document.createElement('option');
 			opt.value = copies[i].id;
-			console.log("exemplaire n°" + copies[i].id + ", statut disponible : " + copies[i].available + ", en réparation : " + copies[i].underRepair);
 			opt.innerHTML = "exemplaire n°" + copies[i].id + ", statut disponible : " + copies[i].available + ", en réparation : " + copies[i].underRepair; 
 			select.appendChild(opt);
 		}

@@ -37,7 +37,7 @@ public class SubscriberServlet extends HttpServlet{
 				if (action.equals("/subscriber")) {
 					gotoSubscribersPage(request, response);
 				}
-				if (action.equals("/searchSubscriber")) {
+				if (action.equals("/searchSubscriberByName")) {
 					subscribersWanted(request, response);
 				}
 				if (action.equals("/subscriberDetails")) { 

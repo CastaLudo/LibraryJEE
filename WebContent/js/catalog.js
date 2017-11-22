@@ -13,7 +13,6 @@ function deleteCatalog() {
     }
     xmlHttp.open("GET", "deleteCatalog?catalogToDelete=" + valueSelected.value, false); // true for asynchronous 
     xmlHttp.send(null);
-	//$.post("deleteCatalog", {catalogToDelete: valueSelected.value});
 	location.reload(true);
 }
 
@@ -49,7 +48,6 @@ function returnData(url) {
 					});
 	return resultat;
 	
-		//return JSON.parse(resultat);
 }
 
 /**
@@ -71,14 +69,12 @@ function removeOptions(selectbox) {
  */
 function viewBooksFromCatalog(resultat) {
 	if (resultat.length != 0) {
-		console.log("visible");
 		document.getElementById("booksInCatalog").style.visibility="hidden";
 		document.getElementById('booksList').style.visibility="visible";
 		select = document.getElementById('booksBox');
 		select.style.visibility="visible";
 		document.getElementById('booksBox').size="15";
 		removeOptions(select);
-//		document.getElementsByName('catalogName').textContent = resultat[0].catalog.catalogName;
 
 		$('label[name=catalogName]').text("Book in "+resultat[0].catalog.catalogName)
 		
@@ -91,7 +87,6 @@ function viewBooksFromCatalog(resultat) {
 		}
 	}
 	else {
-		console.log("caché");
 		document.getElementById('booksList').style.visibility="hidden";
 		document.getElementById("booksBox").style.visibility="hidden";
 		document.getElementById("booksInCatalog").style.visibility="visible";

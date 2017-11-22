@@ -4,9 +4,7 @@
 
 function getAuthorDetails(id) {
 	var author = returnData('/libraryJEE/getAuthorDetails?id='+id);
-	console.log("call js insert values");
 	var books = returnBooks('/libraryJEE/getAuthorSBooks?id='+id);
-	console.log("books : " + books);
 	viewAuthorDetails(author, books);
 }
 
@@ -52,13 +50,11 @@ function removeOptions(selectbox) {
 
 function viewAuthorDetails(author, books) {
 	if (author.length != 0) {
-		console.log("insert author details in centerDiv");
 		$('#idAuthor').attr({value : author.id});
 		$('#firstNameAuthor').val(author.authorFirstName);
 		$('#lastNameAuthor').val(author.authorLastName);
 		$('#yearOfBirth').val(author.yearOfBirth);
 		$('#yearOfDeath').val(author.yearOfDeath);
-		console.log("nb books = " + books.length);
 		}
 	if (books.length != 0) {
 		document.getElementById("booksBox").style.visibility="visible";

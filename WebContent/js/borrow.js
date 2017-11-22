@@ -3,8 +3,8 @@
  */
 
 function getBorrowDetails(id) {
-	var copy = returnData('/libraryJEE/copyDetails?id='+id);
-	var borrower = returnData('/librayJEE/subscriberDetails?id='+id);
+	var copy = returnData('/libraryJEE/copyBorrowed?id='+id);
+	var borrower = returnData('/libraryJEE/subscriberBorrowing?id='+id);
 	displayBorrowDetails(copy, borrower);
 }
 
@@ -24,6 +24,10 @@ function returnData(url) {
 	return resultat;
 }
 
-function displayBorrowDetails(copy, subscriber) {
-	
+function displayBorrowDetails(copy, borrower) {
+	$('#idCopy').val(copy.id);
+	$('#copyDetails').val(copy.book.isbn + " : " + copy.book.title + " by " 
+			+ copy.book.author.authorFirstName + " " + copy.book.author.authorLastName);
+	$('#idBorrower').val(borrower.subscriberId);
+	$('#borrowerDetails').val(borrower.subscriberFirstName + " " + borrower.subscriberLastName);
 }

@@ -24,7 +24,7 @@
     <servlet-name>subscriber</servlet-name>
     <url-pattern>/subscriber</url-pattern>
     <url-pattern>/subscriberDetails</url-pattern>
-    <url-pattern>/searchSubscriber</url-pattern>
+    <url-pattern>/searchSubscriberByName</url-pattern>
     <url-pattern>/borrowsInSubscriber</url-pattern>
     <url-pattern>/addSubscriber</url-pattern>
   </servlet-mapping>

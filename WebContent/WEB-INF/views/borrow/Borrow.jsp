@@ -32,7 +32,7 @@
 						style="border-color: orange;">
 							<c:forEach var="borrow" items="${borrows}">
 								<option name="copyId" value="${borrow.getId()}"
-								 onclick="">
+								 onclick="getBorrowDetails(${borrow.getId()})">
 									<b>${borrow.getBook().getTitle()} - Exemplaire n°${borrow.getId()}</b>
 								</option>
 							</c:forEach>
@@ -44,5 +44,8 @@
 		<div name="centerDiv">
 		<jsp:include page="borrowDetails.jsp"></jsp:include>
 		</div>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" 
+                  src="<c:url value="/js/borrow.js"/>"></script>
 </body>
 </html>

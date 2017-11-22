@@ -37,10 +37,10 @@ public class BorrowServlet extends HttpServlet{
 				if (action.equals("/borrow")) {
 					gotoBorrowsPage(request, response);
 				}
-				if (action.equals("/copyDetails")) {
+				if (action.equals("/copyBorrowed")) {
 					borrowedCopyDetails(request, response);
 				}
-				if (action.equals("/subscriberDetails")) {
+				if (action.equals("/subscriberBorrowing")) {
 				borrowerDetails(request, response);
 				}
 
@@ -63,10 +63,10 @@ public class BorrowServlet extends HttpServlet{
 		Copy borrowedCopy = serviceLib.getCopy(id);
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		String arrayToJson = objectMapper.writeValueAsString(borrowedCopy);
-		rep.setContentType("application/JSON");
+		String arrayJson = objectMapper.writeValueAsString(borrowedCopy);
+		rep.setContentType("application/json");
 		rep.setCharacterEncoding("UTF-8");
-		rep.getWriter().write(arrayToJson);
+		rep.getWriter().write(arrayJson);
 	}
 	
 	private void borrowerDetails(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException, IOException {
@@ -75,7 +75,7 @@ public class BorrowServlet extends HttpServlet{
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		String arrayToJson = objectMapper.writeValueAsString(borrower);
-		response.setContentType("application/JSON");
+		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(arrayToJson);
 	}
