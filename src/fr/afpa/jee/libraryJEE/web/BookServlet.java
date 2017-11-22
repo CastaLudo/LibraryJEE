@@ -50,18 +50,14 @@ public class BookServlet extends HttpServlet{
 
 	private void returnCopies(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		long isbn = Long.valueOf(request.getParameter("id"));
-		System.out.println(isbn);
 		ArrayList<Copy> copies = new ArrayList<Copy>();
-		System.out.println("ask for serviceLib");
 		copies = serviceLib.getCopies(isbn);
-		System.out.println("return " + copies);
 		ObjectMapper objectMapper = new ObjectMapper();
 		// Set pretty printing of json
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		// 1. Convert List of Person objects to JSON
 		String arrayJson = objectMapper.writeValueAsString(copies);
 		// System.out.println("1. Convert List of Book objects to JSON :");
-		System.out.println(arrayJson);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(arrayJson);
