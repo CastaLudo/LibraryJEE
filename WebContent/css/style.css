@@ -54,7 +54,7 @@ td.fieldsToFill {
 	width: 60%;
 	font-family: 'Montserrat', sans-serif; 
 }
-option {
+form, option, button {
 	font-family: 'Montserrat', sans-serif; 
 }
 

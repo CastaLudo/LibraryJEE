@@ -14,8 +14,11 @@
 </header>
 <h4>Emprunts en cours</h4>
 	<br />
-	<form action="searchBorrowsByTitle" method="get">
-	<input name="searchTitle" value="" type="text" size="40">
+	<form action="searchInBorrow" method="get">
+	<select id="selectSearchType">
+		<option value="searchBorrowByBookName">par titre de livre</option>
+		<option value="searchBorrowxBySubscriberName">par nom d'abonné</option>
+	</select>
 	<br />
 	<input name="searchSubscriber" value="" type="text" size="40">
 	<span></span><input type="submit" value="Recherche">
