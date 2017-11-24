@@ -43,7 +43,14 @@ public class BorrowServlet extends HttpServlet{
 				if (action.equals("/subscriberBorrowing")) {
 				borrowerDetails(request, response);
 				}
+				if (action.equals("/searchInBorrow")) {
+					searchBorrows(request, response);
+				}
+	}
 
+	private void searchBorrows(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void gotoBorrowsPage(HttpServletRequest request, HttpServletResponse response) {
