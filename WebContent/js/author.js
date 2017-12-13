@@ -1,29 +1,17 @@
-/**
- * 
+/** Query the author details and his books list for the selected id and Ask displaying its @authorDetails.jsp
+ * @param id
+ * @returns
  */
-
 function getAuthorDetails(id) {
 	var author = returnData('/libraryJEE/getAuthorDetails?id='+id);
-	var books = returnBooks('/libraryJEE/getAuthorSBooks?id='+id);
+	var books = returnData('/libraryJEE/getAuthorSBooks?id='+id);
 	viewAuthorDetails(author, books);
 }
 
-function returnBooks(url) {
-	$.get({
-		url:url,
-		async:false
-	})
-	.done(function(datas, status)
-			{
-		resultat = datas;
-			})
-			.fail(function(err)
-					{
-				resultat = err.status;
-					});
-	return resultat;
-}
-
+/** AJAX Query Servlet  
+ * @param url
+ * @returns resultat as Json format
+ */
 function returnData(url) {
 	$.get({
 		url:url,
@@ -40,14 +28,11 @@ function returnData(url) {
 	return resultat;
 }
 
-function removeOptions(selectbox) {
-    var i;
-    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
-    {
-        selectbox.remove(i);
-    }
-}
-
+/** Display author details and the books written by him/her @authorDetails.jsp
+ * @param author
+ * @param books
+ * @returns
+ */
 function viewAuthorDetails(author, books) {
 	if (author.length != 0) {
 		$('#idAuthor').attr({value : author.id});
@@ -72,4 +57,16 @@ function viewAuthorDetails(author, books) {
 	else {
 		document.getElementById("booksBox").style.visibility="hidden";
 	}
+}
+
+/** Clear all option in 'select' tag
+ * @param select
+ * @returns 
+ */
+function removeOptions(select) {
+    var i;
+    for(i = select.options.length - 1 ; i >= 0 ; i--)
+    {
+    	select.remove(i);
+    }
 }

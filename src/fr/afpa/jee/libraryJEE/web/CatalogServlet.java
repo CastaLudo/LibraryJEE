@@ -16,6 +16,10 @@ import fr.afpa.jee.libraryJEE.dao.DaoLibraryMySql;
 import fr.afpa.jee.libraryJEE.model.Book;
 import fr.afpa.jee.libraryJEE.model.Catalog;
 
+/**
+ * @author 34011-79-08
+ *
+ */
 public class CatalogServlet extends HttpServlet {
 
 	/**
@@ -68,6 +72,11 @@ public class CatalogServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 */
 	private void CatalogToDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		if (request.getParameter("catalogToDelete") != null) {
 			int id = Integer.valueOf(request.getParameter("catalogToDelete"));
@@ -75,15 +84,6 @@ public class CatalogServlet extends HttpServlet {
 				request.getSession().removeAttribute("errorMessage");
 				System.out.println("deleting");
 				serviceLib.deleteCatalog(id);
-				/*try {
-					// gotoCatalogsPage(request, response);
-
-					response.sendRedirect("catalog");
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
 			} else {
 				System.out.println("error deleting");
 				request.getSession().setAttribute("errorMessage",
@@ -92,6 +92,12 @@ public class CatalogServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void addCatalog(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getParameter("catalogToAdd") != null) {
@@ -103,6 +109,12 @@ public class CatalogServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void innerCatalogBooksDisplay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("errorMessage", "");
@@ -120,6 +132,12 @@ public class CatalogServlet extends HttpServlet {
 		response.getWriter().write(arrayToJson);
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void gotoCatalogsPage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ArrayList<Catalog> catalogs = new ArrayList<Catalog>();
@@ -128,6 +146,12 @@ public class CatalogServlet extends HttpServlet {
 		getServletContext().getRequestDispatcher("/WEB-INF/views/catalog/Catalog.jsp").forward(request, response);
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void catalogsWanted(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ArrayList<Catalog> catalogs = new ArrayList<Catalog>();

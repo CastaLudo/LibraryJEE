@@ -1,20 +1,19 @@
 /**
- * 
+ * @param id
+ * @returns
  */
 function getSubscriberDetails(id) {
-	var subscriber = returnDetails('/libraryJEE/subscriberDetails?id='+id);
-	var borrows = returnBorrows('/libraryJEE/borrowsInSubscriber?id='+id);
+	var subscriber = returnData('/libraryJEE/subscriberDetails?id='+id);
+	var borrows = returnData('/libraryJEE/borrowsInSubscriber?id='+id);
 	displayInformations(subscriber, borrows);
 }
 
-function removeOptions(selectbox) {
-	var i;
-	for(i = selectbox.options.length - 1 ; i >= 0 ; i--) 
-	{
-		selectbox.remove(i);
-	}
-}
 
+/**
+ * @param subscriber
+ * @param borrows
+ * @returns
+ */
 function displayInformations(subscriber, borrows) {
 	if (subscriber.length != 0) {
 		$('#subscriberFirstName').val(subscriber.subscriberFirstName);
@@ -36,23 +35,11 @@ function displayInformations(subscriber, borrows) {
 	else document.getElementById("booksBox").style.visibility="hidden"; 
 }
 
-function returnBorrows(url) {
-	$.get({
-		url:url,
-		async:false
-	})
-	.done(function(datas, status)
-			{
-		resultat = datas;
-			})
-			.fail(function(err)
-					{
-				resultat = err.status;
-					});
-	return resultat;
-}
-
-function returnDetails(url) {
+/** AJAX Query Servlet  
+ * @param url
+ * @returns resultat as Json format
+ */
+function returnData(url) {
 	$.get({
 		url:url,
 		async:false
@@ -66,4 +53,16 @@ function returnDetails(url) {
 				resultat = err.status;
 					});
 	return resultat;
+}
+
+/** Clear all option in 'select' tag
+ * @param select
+ * @returns 
+ */
+function removeOptions(select) {
+    var i;
+    for(i = select.options.length - 1 ; i >= 0 ; i--)
+    {
+    	select.remove(i);
+    }
 }

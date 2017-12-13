@@ -1,13 +1,17 @@
 /**
- * 
+ * @param id
+ * @returns
  */
-
 function getBorrowDetails(id) {
 	var copy = returnData('/libraryJEE/copyBorrowed?id='+id);
 	var borrower = returnData('/libraryJEE/subscriberBorrowing?id='+id);
 	displayBorrowDetails(copy, borrower);
 }
 
+/** AJAX Query Servlet  
+ * @param url
+ * @returns resultat as Json format
+ */
 function returnData(url) {
 	$.get({
 		url:url,
@@ -24,6 +28,11 @@ function returnData(url) {
 	return resultat;
 }
 
+/**
+ * @param copy
+ * @param borrower
+ * @returns
+ */
 function displayBorrowDetails(copy, borrower) {
 	$('#idCopy').val(copy.id);
 	$('#copyDetails').val(copy.book.isbn + " : " + copy.book.title + " by " 
