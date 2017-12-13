@@ -1,29 +1,17 @@
 /**
- * 
+ * @param isbn
+ * @returns
  */
-
 function getBookDetails(isbn) {
 	var book = returnData('/libraryJEE/bookDetails?id='+isbn);
-	var copies = returnCopies('/libraryJEE/nbCopies?id='+isbn);
+	var copies = returnData('/libraryJEE/nbCopies?id='+isbn);
 	viewBookDetails(book, copies);
 }
 
-function returnCopies(url) {
-	$.get({
-		url:url,
-		async:false
-	})
-	.done(function(datas, status)
-			{
-		resultat = datas;
-			})
-			.fail(function(err)
-					{
-				resultat = err.status;
-					});
-	return resultat;
-}
-
+/** AJAX Query Servlet  
+ * @param url
+ * @returns resultat as Json format
+ */
 function returnData(url) {
 	$.get({
 		url:url,
@@ -40,6 +28,11 @@ function returnData(url) {
 	return resultat;
 }
 
+/**
+ * @param resultBook
+ * @param copies
+ * @returns
+ */
 function viewBookDetails(resultBook, copies) {
 	if (resultBook.length != 0) {
 		$('#isbn').attr({value : resultBook.isbn});
@@ -69,12 +62,14 @@ function viewBookDetails(resultBook, copies) {
 	}
 }
 
-function removeOptions(selectbox) {
-	if (selectbox.options.length > 0) {
-		var j;
-		for(j = selectbox.options.length - 1 ; j >= 0 ; j--) 
-		{
-			selectbox.remove(j);
-		}
-	}
+/** Clear all option in 'select' tag
+ * @param select
+ * @returns 
+ */
+function removeOptions(select) {
+    var i;
+    for(i = select.options.length - 1 ; i >= 0 ; i--)
+    {
+    	select.remove(i);
+    }
 }

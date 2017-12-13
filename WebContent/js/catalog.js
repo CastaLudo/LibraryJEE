@@ -1,38 +1,16 @@
-/**
- * 
+/** Query the booklist for the selected Catalog and Ask displaying the books list in innerCatalogBooks.jsp
+ * @param idCatalog
+ * @returns 
  */
-
-function deleteCatalog() {
-	var selectedCatalog = document.getElementById("catalogs");
-	var valueSelected = selectedCatalog.options[selectedCatalog.selectedIndex];
-	
-	var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
-    }
-    xmlHttp.open("GET", "deleteCatalog?catalogToDelete=" + valueSelected.value, false); // true for asynchronous 
-    xmlHttp.send(null);
-	location.reload(true);
-}
-
-function getSelectedOption(sel) {
-    var opt;
-    var len = sel.length;
-    for ( var i = 0; i < len; i++ ) {
-        opt = sel.option[i];
-        if ( opt.selected === true ) {
-            break;
-        }
-    }
-    return opt;
-}
-
 function getBooksList(idCatalog) {
 	var X = returnData('/libraryJEE/booksInCatalog?id='+idCatalog);
 	viewBooksFromCatalog(X);
 }
 
+/** AJAX Query Servlet  
+ * @param url
+ * @returns resultat as Json format
+ */
 function returnData(url) {
 	$.get({
 		url:url,
@@ -50,20 +28,7 @@ function returnData(url) {
 	
 }
 
-/**
- * @param selectbox
- * @returns clear the book list in innerCatalogBooks.jsp
- */
-function removeOptions(selectbox) {
-    var i;
-    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
-    {
-        selectbox.remove(i);
-    }
-}
-
-
-/**
+/** Display the books parsed as Json format in the booksBox @innerCatalogBooks.jsp
  * @param resultat
  * @returns
  */
@@ -93,4 +58,33 @@ function viewBooksFromCatalog(resultat) {
 		document.getElementById("booksInCatalog").innerHTML = "Il n'y a pas de livre référencé dans ce catalogue";
 	}
 	
+}
+
+/** Clear all option in 'select' tag
+ * @param select
+ * @returns 
+ */
+function removeOptions(select) {
+    var i;
+    for(i = select.options.length - 1 ; i >= 0 ; i--)
+    {
+    	select.remove(i);
+    }
+}
+
+/**Delete the selected Catalog and reload the Catalog's list
+ * @returns
+ */
+function deleteCatalog() {
+	var selectedCatalog = document.getElementById("catalogs");
+	var valueSelected = selectedCatalog.options[selectedCatalog.selectedIndex];
+	
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", "deleteCatalog?catalogToDelete=" + valueSelected.value, false); // true for asynchronous 
+    xmlHttp.send(null);
+	location.reload(true);
 }
