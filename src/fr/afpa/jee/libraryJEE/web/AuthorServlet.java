@@ -18,7 +18,7 @@ import fr.afpa.jee.libraryJEE.model.Book;
 import fr.afpa.jee.libraryJEE.service.IServiceLibrary;
 import fr.afpa.jee.libraryJEE.service.ServiceLibrary;
 
-public class AuthorServlet extends HttpServlet{
+public class AuthorServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -32,51 +32,53 @@ public class AuthorServlet extends HttpServlet{
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//On récupère l'action à effectuer
-				String action = request.getServletPath();
-				if (action.equals("/author")) {
-					gotoAuthorsPage(request, response);
-				}
-				
-				if(action.equals("/searchAuthorByName")) {
-					searchAuthorByName(request, response);
-				}
-				
-				if (action.equals("/getAuthorDetails")) {
-					getAuthorDetails(request, response);
-				}
-				
-				if (action.equals("/getAuthorSBooks")) {
-					getAuthorSBooks(request, response);
-				}
+		// On récupère l'action à effectuer
+		String action = request.getServletPath();
+		if (action.equals("/author")) {
+			gotoAuthorsPage(request, response);
+		}
+
+		if (action.equals("/searchAuthorByName")) {
+			searchAuthorByName(request, response);
+		}
+
+		if (action.equals("/getAuthorDetails")) {
+			getAuthorDetails(request, response);
+		}
+
+		if (action.equals("/getAuthorSBooks")) {
+			getAuthorSBooks(request, response);
+		}
 
 	}
 
-	private void getAuthorSBooks(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException, IOException{
-		//recovery of the id
+	private void getAuthorSBooks(HttpServletRequest request, HttpServletResponse response)
+			throws JsonProcessingException, IOException {
+		// recovery of the id
 		int id = Integer.valueOf(request.getParameter("id"));
 		ArrayList<Book> booksList = serviceLib.getBookListByAuthor(id);
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		String arrayJson = objectMapper.writeValueAsString(booksList);
-		//sending response
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write(arrayJson);
+		// sending response
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(arrayJson);
 	}
 
-	private void getAuthorDetails(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException, IOException {
-		//recovery of the id
+	private void getAuthorDetails(HttpServletRequest request, HttpServletResponse response)
+			throws JsonProcessingException, IOException {
+		// recovery of the id
 		int id = Integer.valueOf(request.getParameter("id"));
-		//asking author @serviceLib
+		// asking author @serviceLib
 		Author selectedAuthor = serviceLib.getAuthor(id);
-		//create the object mapper
+		// create the object mapper
 		ObjectMapper objectMapper = new ObjectMapper();
-		//set printing to Json
+		// set printing to Json
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		//Convert List of Details objects to JSON
+		// Convert List of Details objects to JSON
 		String arrayToJson = objectMapper.writeValueAsString(selectedAuthor);
-		//sending response
+		// sending response
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(arrayToJson);
@@ -88,11 +90,10 @@ public class AuthorServlet extends HttpServlet{
 		request.setAttribute("authors", authors);
 		try {
 			getServletContext().getRequestDispatcher("/WEB-INF/views/author/Author.jsp").forward(request, response);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void gotoAuthorsPage(HttpServletRequest request, HttpServletResponse response) {
@@ -101,8 +102,7 @@ public class AuthorServlet extends HttpServlet{
 		request.setAttribute("authors", authors);
 		try {
 			getServletContext().getRequestDispatcher("/WEB-INF/views/author/Author.jsp").forward(request, response);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -13,7 +13,10 @@ import fr.afpa.jee.libraryJEE.model.Catalog;
 import fr.afpa.jee.libraryJEE.model.Copy;
 import fr.afpa.jee.libraryJEE.model.Subscriber;
 
-
+/**
+ * @author 34011-79-08
+ *
+ */
 /**
  * @author 34011-79-08
  *
@@ -28,7 +31,6 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	private ResultSet rsInside = null;
 	private ResultSet rs = null;
 
-
 	public DaoLibraryMySql() {
 		init();
 	}
@@ -36,19 +38,17 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public void init() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public ArrayList<Catalog> allCatalogs() {
 		ArrayList<Catalog> catalogs = new ArrayList<Catalog>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM catalog;";
@@ -66,20 +66,18 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return catalogs;			
+		return catalogs;
 	}
-
 
 	public ArrayList<Book> allBooks() {
 		ArrayList<Book> books = new ArrayList<Book>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM book;";
@@ -102,21 +100,19 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return books;			
+		return books;
 	}
 
-
-	public ArrayList<Subscriber> allSubscribers() {		
+	public ArrayList<Subscriber> allSubscribers() {
 		ArrayList<Subscriber> subscribers = new ArrayList<Subscriber>();
 
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM subscriber;";
@@ -135,20 +131,18 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return subscribers;			
+		return subscribers;
 	}
-
 
 	public ArrayList<Author> allAuthors() {
 		ArrayList<Author> authors = new ArrayList<Author>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM author;";
@@ -169,20 +163,18 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return authors;			
+		return authors;
 	}
-
 
 	public ArrayList<Catalog> searchCatalog(String name) {
 		ArrayList<Catalog> catalogs = new ArrayList<Catalog>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM catalog WHERE catalogName LIKE '%" + name.replace("'", "\\'") + "%';";
@@ -200,23 +192,24 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return catalogs;
 	}
 
-/**Return a list of Books
- * @param keywords
- * return an Arraylist of Books where title or subtitle contains keywords
- */
+	/**
+	 * Return a list of Books
+	 * 
+	 * @param keywords
+	 * @returns Arraylist of Books where title or subtitle contains keywords
+	 */
 	public ArrayList<Book> searchBook(String keywords) {
 		ArrayList<Book> books = new ArrayList<Book>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM book WHERE title LIKE '%" + keywords.toLowerCase().replace("'", "\\'")
@@ -240,22 +233,23 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return books;			
+		return books;
 	}
 
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
+	 * @see fr.afpa.jee.libraryJEE.dao.IDaoLibrary#getCopy(int)
 	 */
 	public Copy getCopy(int id) {
 		Copy c = null;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy WHERE idCopy = " + id + ";";
@@ -275,13 +269,11 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return c;
 	}
-
 
 	/** 
 	 * 
@@ -290,13 +282,13 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		ArrayList<Subscriber> subscribers = new ArrayList<Subscriber>();
 
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "SELECT * FROM subscriber WHERE firstName LIKE '%" + name.toLowerCase().replace("'", "\\'") 
-					+"%' OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%';";
+			String query = "SELECT * FROM subscriber WHERE firstName LIKE '%" + name.toLowerCase().replace("'", "\\'")
+					+ "%' OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%';";
 
 			result = statement.executeQuery(query);
 
@@ -312,23 +304,18 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return subscribers;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.afpa.jee.libraryJEE.dao.IDaoLibrary#searchBorrow()
-	 */
-
 	public ArrayList<Copy> searchBorrow() {
 		ArrayList<Copy> copies = new ArrayList<Copy>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy INNER JOIN borrow ON idCopy = Copy_idCopy WHERE current = 1;";
@@ -344,7 +331,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 					underRepair = true;
 				}
 				if (!result.getBoolean("available")) {
-					available = false;					
+					available = false;
 				}
 				Book book = getBook(isbnBook);
 				Copy copyToAdd = new Copy(book, id, available, underRepair);
@@ -353,8 +340,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao searchBorrow()");
 		}
@@ -364,13 +350,13 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public int countBorrowsBySubscriber(int subscriberId) {
 		int countBorrow = 0;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM borrow JOIN subscriber ON idSubscriber = Subscriber_idSubscriber "
-					+ " WHERE current = 1 AND Subscriber_idSubscriber = "+ subscriberId +";";
+					+ " WHERE current = 1 AND Subscriber_idSubscriber = " + subscriberId + ";";
 			result = statement.executeQuery(query);
 
 			while (result.next()) {
@@ -378,8 +364,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao getBorrowedBooksBySubscriber()");
 		}
@@ -389,15 +374,15 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public ArrayList<Book> getBorrowedBooksBySubscriber(int subscriberId) {
 		ArrayList<Book> books = new ArrayList<Book>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM book inner JOIN copy ON Book_isbn = isbn "
 					+ " JOIN borrow ON Copy_idCopy = idCopy"
 					+ " JOIN subscriber ON idSubscriber = Subscriber_idSubscriber"
-					+ " WHERE current = 1 AND Subscriber_idSubscriber = "+ subscriberId +";";
+					+ " WHERE current = 1 AND Subscriber_idSubscriber = " + subscriberId + ";";
 			result = statement.executeQuery(query);
 
 			while (result.next()) {
@@ -410,32 +395,33 @@ public class DaoLibraryMySql implements IDaoLibrary {
 				Catalog catalog = getCatalog(catalogId);
 
 				Book dataToAdd = new Book(isbn, title, subtitle, author, catalog);
-				books.add(dataToAdd);				
+				books.add(dataToAdd);
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao getBorrowedBooksBySubscriber()");
 		}
 		return books;
 	}
 
-/**Return the Borrower's information
- * @param id of a copy
- * return the informations of the subcriber's borrower
- */
+	/**
+	 * Return the Borrower's information
+	 * 
+	 * @param id
+	 *            of a copy return the informations of the subcriber's borrower
+	 */
 	public Subscriber getBorrower(int idCopy) {
 		Subscriber s = null;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM subscriber JOIN borrow WHERE Subscriber_idSubscriber = "
-					+ "idSubscriber and Copy_idCopy = " + idCopy +";";
+					+ "idSubscriber and Copy_idCopy = " + idCopy + ";";
 
 			result = statement.executeQuery(query);
 
@@ -451,8 +437,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return s;
@@ -462,42 +447,39 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public int getSelectedIdCopyBorrowedBySubscriberAndBook(long isbn, int subscriberId) {
 		int i = -1;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM borrow inner JOIN copy ON Copy_idCopy = idCopy "
-					+ " JOIN book ON Book_isbn = isbn "
-					+ " JOIN subscriber ON idSubscriber = Subscriber_idSubscriber "
-					+ " WHERE current = 1 AND Subscriber_idSubscriber = "+ subscriberId +" "
-					+ "AND isbn = "+ isbn +";";
+					+ " JOIN book ON Book_isbn = isbn " + " JOIN subscriber ON idSubscriber = Subscriber_idSubscriber "
+					+ " WHERE current = 1 AND Subscriber_idSubscriber = " + subscriberId + " " + "AND isbn = " + isbn
+					+ ";";
 			result = statement.executeQuery(query);
 
 			while (result.next()) {
-				i = result.getInt("Copy_idCopy");				
+				i = result.getInt("Copy_idCopy");
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao getSelectedIdCopyBorrowedBySubscriberAndBook()");
 		}
 		return i;
 	}
 
-
 	public ArrayList<Author> searchAuthor(String name) {
 		ArrayList<Author> authors = new ArrayList<Author>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "SELECT * FROM author WHERE firstName LIKE '%" + name.toLowerCase().replace("'", "\\'") 
-					+"%' OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%';";
+			String query = "SELECT * FROM author WHERE firstName LIKE '%" + name.toLowerCase().replace("'", "\\'")
+					+ "%' OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%';";
 
 			result = statement.executeQuery(query);
 
@@ -515,19 +497,17 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return authors;
 	}
 
-
 	public void addCatalog(String catalogName) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "INSERT INTO catalog(catalogName) values ('" + catalogName.replace("'", "\\'") + "');";
@@ -536,19 +516,17 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			statement.close();
 
-			DaoConnect.DaoDisconnect(connection);			
-		}
-		catch (SQLException e) {
+			DaoConnect.DaoDisconnect(connection);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public void deleteCatalog(int selectedCatalogId) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String delQuery = "DELETE FROM catalog WHERE idCatalog =" + selectedCatalogId + ";";
@@ -557,20 +535,18 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			statement.close();
 
-			DaoConnect.DaoDisconnect(connection);			
-		}
-		catch (SQLException e) {
+			DaoConnect.DaoDisconnect(connection);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public Catalog getCatalog(int selectedCatalogId) {
 		Catalog selectedCatalog = null;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM catalog WHERE idCatalog =" + selectedCatalogId + ";";
@@ -587,13 +563,11 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return selectedCatalog;
 	}
-
 
 	public void addBook(Book b) {
 		long isbn = b.getIsbn();
@@ -602,30 +576,29 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		int authorId = b.getAuthor().getAuthorId();
 		int catalogId = b.getCatalog().getId();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "INSERT INTO book VALUES (" + isbn + ", \""+ title + "\", \"" + subtitle + "\", " + authorId + ", " + catalogId + ");";
+			String query = "INSERT INTO book VALUES (" + isbn + ", \"" + title + "\", \"" + subtitle + "\", " + authorId
+					+ ", " + catalogId + ");";
 			statement.executeUpdate(query);
 
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-
 	public void deleteBook(long isbn) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String delQuery = "DELETE FROM book WHERE isbn =" + isbn + ";";
@@ -636,19 +609,17 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public Book getBook(long selectedIsbn) {
 		Book selectedBook = null;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM book WHERE isbn =" + selectedIsbn + ";";
@@ -663,56 +634,52 @@ public class DaoLibraryMySql implements IDaoLibrary {
 				int catalogId = resultIn.getInt("Catalog_idCatalog");
 				Author author = getAuthor(authorId);
 				Catalog catalog = getCatalog(catalogId);
-				selectedBook =  new Book(isbn, title, subtitle, author, catalog);
+				selectedBook = new Book(isbn, title, subtitle, author, catalog);
 			}
 
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return selectedBook;
 	}
 
-
 	public void addCopy(long isbn) {
 
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "INSERT INTO copy (Book_isbn, available, underRepair) VALUES (" + isbn + ", "+ 1 + ", " + 0 + ");";
+			String query = "INSERT INTO copy (Book_isbn, available, underRepair) VALUES (" + isbn + ", " + 1 + ", " + 0
+					+ ");";
 
 			statement.executeUpdate(query);
 
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-
 	}
-
-
 
 	public void addSubscriber(Subscriber s) {
 		String subscriberFirstName = s.getSubscriberFirstName().toUpperCase().replace("'", "\\'");
-		String subscriberLastName = s.getSubscriberLastName().replace("'", "\\'");		
+		String subscriberLastName = s.getSubscriberLastName().replace("'", "\\'");
 
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "INSERT INTO subscriber(firstName, lastName) values ('" + subscriberFirstName + "', '" + subscriberLastName + "');";
+			String query = "INSERT INTO subscriber(firstName, lastName) values ('" + subscriberFirstName + "', '"
+					+ subscriberLastName + "');";
 
 			statement.executeUpdate(query);
 
@@ -720,18 +687,16 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public void deleteSubscriber(int id) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String delQuery = "DELETE FROM subscriber WHERE idSubscriber =" + id + ";";
@@ -742,22 +707,20 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}  
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public Subscriber getSubscriber(int id) {
 		Subscriber selectedSubscriber = null;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String sel = "SELECT * FROM subscriber WHERE idSubscriber = " + id +";";
+			String sel = "SELECT * FROM subscriber WHERE idSubscriber = " + id + ";";
 
 			result = statement.executeQuery(sel);
 
@@ -773,13 +736,11 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return selectedSubscriber;
 	}
-
 
 	public void addAuthor(Author a) {
 		String authorFirstName = a.getAuthorFirstName().toUpperCase().replace("'", "\\'");
@@ -788,13 +749,13 @@ public class DaoLibraryMySql implements IDaoLibrary {
 		int yearOfDeath = a.getYearOfDeath();
 
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "INSERT INTO author(firstName, lastName, yearOfBirth, yearOfDeath) values "
-					+ "('" + authorFirstName + "', '" + authorLastName  + "', '" + yearOfBirth + "', '" + yearOfDeath + "');";
+			String query = "INSERT INTO author(firstName, lastName, yearOfBirth, yearOfDeath) values " + "('"
+					+ authorFirstName + "', '" + authorLastName + "', '" + yearOfBirth + "', '" + yearOfDeath + "');";
 
 			statement.executeUpdate(query);
 
@@ -802,18 +763,16 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public void deleteAuthor(int id) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String delQuery = "DELETE FROM author WHERE idAuthor =" + id + ";";
@@ -824,22 +783,20 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public Author getAuthor(int id) {
 		Author selectedAuthor = null;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String sel = "SELECT * FROM author WHERE idAuthor = " + id +";";
+			String sel = "SELECT * FROM author WHERE idAuthor = " + id + ";";
 
 			rsInside = statement.executeQuery(sel);
 
@@ -857,27 +814,26 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return selectedAuthor;
 	}
 
-
 	public void updateBook(long isbn, String title, String subtitle, int authorId, int catalogId) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 			String query;
 			if (subtitle == null) {
-				query = "UPDATE book SET title ='" + title.replace("'", "\\'") + "', Author_idAuthor ='" + authorId + 
-						"', Catalog_idCatalog = '" + catalogId + "' WHERE isbn = '"+ isbn +"';";
-			}
-			else query = "UPDATE book SET title ='" + title.replace("'", "\\'") + "', subtitle = '" + subtitle.replace("'", "\\'") + "', Author_idAuthor ='" + authorId + 
-					"', Catalog_idCatalog = '" + catalogId + "' WHERE isbn = '"+ isbn +"';";
+				query = "UPDATE book SET title ='" + title.replace("'", "\\'") + "', Author_idAuthor ='" + authorId
+						+ "', Catalog_idCatalog = '" + catalogId + "' WHERE isbn = '" + isbn + "';";
+			} else
+				query = "UPDATE book SET title ='" + title.replace("'", "\\'") + "', subtitle = '"
+						+ subtitle.replace("'", "\\'") + "', Author_idAuthor ='" + authorId + "', Catalog_idCatalog = '"
+						+ catalogId + "' WHERE isbn = '" + isbn + "';";
 
 			statement.executeUpdate(query);
 
@@ -885,22 +841,20 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
-	public void updateSubscriber(int id, String firstName,String lastName) {
+	public void updateSubscriber(int id, String firstName, String lastName) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "UPDATE subscriber SET firstName ='" + firstName.toUpperCase().replace("'", "\\'") + "', "
-					+ "lastName = '" + lastName.replace("'", "\\'") + "' WHERE idSubscriber = "+ id +";";
+					+ "lastName = '" + lastName.replace("'", "\\'") + "' WHERE idSubscriber = " + id + ";";
 
 			statement.executeUpdate(query);
 
@@ -908,24 +862,22 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void updateAuthor(int id, String firstName, String lastName, int birth, int death) {
 
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "UPDATE author SET firstName ='" + firstName.toUpperCase().replace("'", "\\'") + "',"
-					+ " lastName = '" + lastName.replace("'", "\\'") + "',  yearOfBirth = '" + birth +"', "
-					+ "yearOfDeath = '" + death + "' WHERE idAuthor = "+ id +";";
+					+ " lastName = '" + lastName.replace("'", "\\'") + "',  yearOfBirth = '" + birth + "', "
+					+ "yearOfDeath = '" + death + "' WHERE idAuthor = " + id + ";";
 
 			statement.executeUpdate(query);
 
@@ -933,22 +885,20 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public ArrayList<Book> getBooksFromCatalog(int selectedCatalogId) {
 		ArrayList<Book> books = new ArrayList<Book>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "SELECT * FROM book WHERE Catalog_idCatalog = " + selectedCatalogId +";";
+			String query = "SELECT * FROM book WHERE Catalog_idCatalog = " + selectedCatalogId + ";";
 
 			result = statement.executeQuery(query);
 
@@ -968,22 +918,21 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return books;			
+		return books;
 	}
 
 	public ArrayList<Book> getBookListByAuthor(int selectedAuthorId) {
 		ArrayList<Book> books = new ArrayList<Book>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "SELECT * FROM book WHERE Author_idAuthor = " + selectedAuthorId +";";
+			String query = "SELECT * FROM book WHERE Author_idAuthor = " + selectedAuthorId + ";";
 
 			result = statement.executeQuery(query);
 
@@ -1003,27 +952,25 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return books;	
+		return books;
 	}
-
 
 	public void addBorrow(int idSubscriber, long isbn, int idCopy) {
 		if (getBorrowedBooksBySubscriber(idSubscriber).size() < 5) {
 			try {
-				//Get connection informations
+				// Get connection informations
 				connection = DaoConnect.DaoConnecting();
-				//Create statement
+				// Create statement
 				statement = connection.createStatement();
 
-				String query = "INSERT INTO borrow VALUES "
-						+ "(" + idSubscriber + ", " + idCopy  + ", " + 1 + ", " + isbn + ");";
+				String query = "INSERT INTO borrow VALUES " + "(" + idSubscriber + ", " + idCopy + ", " + 1 + ", "
+						+ isbn + ");";
 
-				String preQuery = "SELECT COUNT(*) FROM borrow WHERE Copy_idCopy = "+ idCopy + " AND "  
-						+ " Subscriber_idSubscriber = " + idSubscriber + " AND Copy_Book_isbn =" + isbn  + ";";
+				String preQuery = "SELECT COUNT(*) FROM borrow WHERE Copy_idCopy = " + idCopy + " AND "
+						+ " Subscriber_idSubscriber = " + idSubscriber + " AND Copy_Book_isbn =" + isbn + ";";
 
 				result = statement.executeQuery(preQuery);
 				while (result.next()) {
@@ -1033,27 +980,23 @@ public class DaoLibraryMySql implements IDaoLibrary {
 					}
 				}
 
-
-
 				statement.executeUpdate(query);
 
 				statement.close();
 
 				DaoConnect.DaoDisconnect(connection);
 
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-
 	public void setCopyAvailable(long isbn, int idCopy) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "UPDATE copy SET underRepair = 0, available = 1 WHERE idCopy = '" + idCopy + "' ; ";
@@ -1061,41 +1004,38 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao setCopyAvailable()");
 		}
 	}
 
-
 	public void setCopyUnavailable(long isbn, int idCopy) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "UPDATE copy SET available = 0  WHERE Book_isbn = '" + isbn + "' AND idCopy = '" + idCopy + "' ; ";
+			String query = "UPDATE copy SET available = 0  WHERE Book_isbn = '" + isbn + "' AND idCopy = '" + idCopy
+					+ "' ; ";
 
 			statement.executeUpdate(query);
 
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao setCopyUnavailable()");
 		}
 	}
 
-
 	public ArrayList<Copy> getCopies(Long isbn) {
 		ArrayList<Copy> copies = new ArrayList<Copy>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy WHERE Book_isbn = " + isbn + ";";
@@ -1110,7 +1050,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 					underRepair = true;
 				}
 				if (!result.getBoolean("available")) {
-					available = false;					
+					available = false;
 				}
 				Copy copyToAdd = new Copy(book, id, available, underRepair);
 				copies.add(copyToAdd);
@@ -1118,8 +1058,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao getCopies()");
 		}
@@ -1129,9 +1068,9 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public boolean isBookAvailable(long isbn) {
 		boolean bookStatus = false;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy WHERE Book_isbn = " + isbn + ";";
@@ -1147,8 +1086,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return bookStatus;
@@ -1157,9 +1095,9 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public boolean isCopyAvailable(int id) {
 		boolean copyStatus = false;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy WHERE idCopy = " + id + ";";
@@ -1171,8 +1109,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return copyStatus;
@@ -1181,9 +1118,9 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public boolean isCopyUnderRepair(int id) {
 		boolean copyRepairStatus = false;
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy WHERE idCopy = " + id + ";";
@@ -1195,53 +1132,50 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Error SQL on Dao isCopyUnderRepair()");;
+			System.out.println("Error SQL on Dao isCopyUnderRepair()");
+			;
 		}
 		return copyRepairStatus;
 	}
 
-
 	public void setCopyToStateUnderRepair(long isbn, int idCopy) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "UPDATE copy SET underRepair = 1  WHERE Book_isbn = '" + isbn + "' AND idCopy = '" + idCopy + "' ; ";
+			String query = "UPDATE copy SET underRepair = 1  WHERE Book_isbn = '" + isbn + "' AND idCopy = '" + idCopy
+					+ "' ; ";
 
 			statement.executeUpdate(query);
 
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao setCopyToStateUnderRepair()");
 		}
 	}
 
-
 	public void returnBorrow(int idSubscriber, long isbn, int idCopy) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "UPDATE borrow SET current = 0 WHERE Copy_idCopy = "+ idCopy +" AND "
-					+ " Subscriber_idSubscriber = " + idSubscriber + " AND Copy_Book_isbn =" + isbn  + ";";
+			String query = "UPDATE borrow SET current = 0 WHERE Copy_idCopy = " + idCopy + " AND "
+					+ " Subscriber_idSubscriber = " + idSubscriber + " AND Copy_Book_isbn =" + isbn + ";";
 			statement.executeUpdate(query);
 
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao returnBorrow()");
 		}
@@ -1251,15 +1185,15 @@ public class DaoLibraryMySql implements IDaoLibrary {
 	public ArrayList<Copy> searchedBorrowsBySubscriber(String name) {
 		ArrayList<Copy> copies = new ArrayList<Copy>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy INNER JOIN borrow ON idCopy = Copy_idCopy "
 					+ " JOIN subscriber ON Subscriber_idSubscriber = idSubscriber "
-					+ " WHERE current = 1 AND (firstName LIKE '%" + name.toLowerCase().replace("'", "\\'") +"%' "  
-					+" OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%');";
+					+ " WHERE current = 1 AND (firstName LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%' "
+					+ " OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%');";
 
 			result = statement.executeQuery(query);
 
@@ -1273,7 +1207,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 					underRepair = true;
 				}
 				if (!result.getBoolean("available")) {
-					available = false;					
+					available = false;
 				}
 				Copy copyToAdd = new Copy(book, id, available, underRepair);
 				copies.add(copyToAdd);
@@ -1281,27 +1215,25 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao searchedBorrowsBySubscriber()");
 		}
 		return copies;
 	}
 
-
 	public ArrayList<Copy> searchedBorrowsByTitle(String title) {
 		ArrayList<Copy> copies = new ArrayList<Copy>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy INNER JOIN borrow ON idCopy = Copy_idCopy "
-					+ " JOIN book ON Book_isbn = isbn "
-					+ " WHERE current = 1 AND (title LIKE '%" + title.toLowerCase().replace("'", "\\'")  
-					+ "%' OR subtitle  LIKE '%" + title.toLowerCase().replace("'", "\\'") + "%');";
+					+ " JOIN book ON Book_isbn = isbn " + " WHERE current = 1 AND (title LIKE '%"
+					+ title.toLowerCase().replace("'", "\\'") + "%' OR subtitle  LIKE '%"
+					+ title.toLowerCase().replace("'", "\\'") + "%');";
 
 			result = statement.executeQuery(query);
 
@@ -1315,7 +1247,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 					underRepair = true;
 				}
 				if (!result.getBoolean("available")) {
-					available = false;					
+					available = false;
 				}
 				Copy copyToAdd = new Copy(book, id, available, underRepair);
 				copies.add(copyToAdd);
@@ -1323,29 +1255,27 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao searchedBorrowsByTitle()");
 		}
 		return copies;
 	}
 
-
 	public ArrayList<Copy> searchedBorrowsByTitleAndSubscriber(String title, String name) {
 		ArrayList<Copy> copies = new ArrayList<Copy>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy INNER JOIN borrow ON idCopy = Copy_idCopy "
 					+ " JOIN book ON Book_isbn = isbn JOIN subscriber ON Subscriber_idSubscriber = idSubscriber "
-					+ " WHERE current = 1 AND ((title LIKE '%" + title.toLowerCase().replace("'", "\\'")  
+					+ " WHERE current = 1 AND ((title LIKE '%" + title.toLowerCase().replace("'", "\\'")
 					+ "%' OR subtitle  LIKE '%" + title.toLowerCase().replace("'", "\\'") + "%') OR ("
-					+ "firstName LIKE '%" + name.toLowerCase().replace("'", "\\'") +"%' "
-					+ "OR lastName  LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%'));";
+					+ "firstName LIKE '%" + name.toLowerCase().replace("'", "\\'") + "%' " + "OR lastName  LIKE '%"
+					+ name.toLowerCase().replace("'", "\\'") + "%'));";
 			result = statement.executeQuery(query);
 
 			while (result.next()) {
@@ -1357,7 +1287,7 @@ public class DaoLibraryMySql implements IDaoLibrary {
 					underRepair = true;
 				}
 				if (!result.getBoolean("available")) {
-					available = false;					
+					available = false;
 				}
 				Book book = getBook(isbnBook);
 				Copy copyToAdd = new Copy(book, id, available, underRepair);
@@ -1366,25 +1296,24 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao searchedBorrowsByTitleAndSubscriber()");
 		}
 		return copies;
 	}
 
-
 	public ArrayList<Subscriber> subscriberAlReadyExists(String firstName, String lastName) {
 		ArrayList<Subscriber> existingSubscribers = new ArrayList<Subscriber>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "SELECT * FROM subscriber WHERE firstName LIKE '%" + firstName.toLowerCase().replace("'", "\\'") 
-					+"%' AND lastName  LIKE '%" + lastName.toLowerCase().replace("'", "\\'") + "%';";
+			String query = "SELECT * FROM subscriber WHERE firstName LIKE '%"
+					+ firstName.toLowerCase().replace("'", "\\'") + "%' AND lastName  LIKE '%"
+					+ lastName.toLowerCase().replace("'", "\\'") + "%';";
 
 			result = statement.executeQuery(query);
 
@@ -1400,26 +1329,22 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return existingSubscribers;
 	}
 
-
-
-
 	public ArrayList<Author> authorAlReadyExists(String firstName, String lastName) {
 		ArrayList<Author> existingAuthors = new ArrayList<Author>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "SELECT * FROM author WHERE firstName LIKE '%" + firstName.toLowerCase().replace("'", "\\'") 
-					+"%' AND lastName  LIKE '%" + lastName.toLowerCase().replace("'", "\\'") + "%';";
+			String query = "SELECT * FROM author WHERE firstName LIKE '%" + firstName.toLowerCase().replace("'", "\\'")
+					+ "%' AND lastName  LIKE '%" + lastName.toLowerCase().replace("'", "\\'") + "%';";
 
 			result = statement.executeQuery(query);
 
@@ -1435,27 +1360,24 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			statement.close();
 
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return existingAuthors;
 	}
 
-
 	public ArrayList<Copy> getCopyToReturn(int idSubscriber, long isbn) {
 		ArrayList<Copy> copyToReturn = new ArrayList<Copy>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String query = "SELECT * FROM copy inner JOIN borrow ON Copy_idCopy = idCopy "
-					+ " JOIN book ON Book_isbn = isbn "
-					+ " JOIN subscriber ON idSubscriber = Subscriber_idSubscriber "
-					+ " WHERE current = 1 AND Subscriber_idSubscriber = "+ idSubscriber +" "
-					+ "AND isbn = "+ isbn +";";
+					+ " JOIN book ON Book_isbn = isbn " + " JOIN subscriber ON idSubscriber = Subscriber_idSubscriber "
+					+ " WHERE current = 1 AND Subscriber_idSubscriber = " + idSubscriber + " " + "AND isbn = " + isbn
+					+ ";";
 			result = statement.executeQuery(query);
 			while (result.next()) {
 				int id = result.getInt("Copy_idCopy");
@@ -1464,27 +1386,23 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao getCopyToReturn()");
 		}
 		return copyToReturn;
 	}
 
-	
 	public ArrayList<Copy> getCopiesToBorrow(long isbn) {
 		ArrayList<Copy> copiesAvalaibleToBorrow = new ArrayList<Copy>();
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
-			String query = "SELECT * FROM copy "
-					+ " JOIN book ON Book_isbn = isbn "
-					+ " WHERE available = 1 "
-					+ " AND isbn = "+ isbn +";";
+			String query = "SELECT * FROM copy " + " JOIN book ON Book_isbn = isbn " + " WHERE available = 1 "
+					+ " AND isbn = " + isbn + ";";
 			rs = statement.executeQuery(query);
 			while (rs.next()) {
 				int id = rs.getInt("idCopy");
@@ -1493,20 +1411,18 @@ public class DaoLibraryMySql implements IDaoLibrary {
 			}
 			statement.close();
 			DaoConnect.DaoDisconnect(connection);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error SQL on Dao getCopiesToBorrow()");
 		}
 		return copiesAvalaibleToBorrow;
 	}
 
-	
 	public void deleteCopy(long isbn, int copyId) {
 		try {
-			//Get connection informations
+			// Get connection informations
 			connection = DaoConnect.DaoConnecting();
-			//Create statement
+			// Create statement
 			statement = connection.createStatement();
 
 			String delQuery = "DELETE FROM copy WHERE idCopy =" + copyId + ";";
@@ -1515,14 +1431,12 @@ public class DaoLibraryMySql implements IDaoLibrary {
 
 			statement.close();
 
-			DaoConnect.DaoDisconnect(connection);	
-			
-		}
-		catch (SQLException e) {
+			DaoConnect.DaoDisconnect(connection);
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
-
 
 }
