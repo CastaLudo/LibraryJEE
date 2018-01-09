@@ -1,4 +1,4 @@
-/**
+/** Query the subscriber details and its copies borrowed then Ask displaying its @subscriberDetails.jsp
  * @param id
  * @returns
  */
@@ -9,7 +9,7 @@ function getSubscriberDetails(id) {
 }
 
 
-/**
+/** Display subscriber details and the copies borrowed by him/her @subscriberDetails.jsp
  * @param subscriber
  * @param borrows
  * @returns

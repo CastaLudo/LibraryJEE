@@ -1,4 +1,4 @@
-/**
+/** Query the book details and its copies list for the selected isbn and Ask displaying its @innerBookDetails.jsp
  * @param isbn
  * @returns
  */

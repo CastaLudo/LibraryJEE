@@ -1,4 +1,4 @@
-/**
+/** Query the borrow details (book details and borrower details) for the selected id and Ask displaying its @borrowDetails.jsp
  * @param id
  * @returns
  */
@@ -28,7 +28,7 @@ function returnData(url) {
 	return resultat;
 }
 
-/**
+/** Displays the borrow details (book details and borrower details) @borrowDetails.jsp
  * @param copy
  * @param borrower
  * @returns

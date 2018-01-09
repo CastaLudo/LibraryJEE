@@ -84,7 +84,6 @@ public class BookServlet extends HttpServlet{
 		try {
 			getServletContext().getRequestDispatcher("/WEB-INF/views/book/Book.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
